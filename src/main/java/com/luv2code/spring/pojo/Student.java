@@ -16,6 +16,10 @@ public class Student {
 		
 	}
 
+	public Student(String name) {
+		this.firstName = name;
+	}
+
 	public int getId() {
 		return id;
 	}
