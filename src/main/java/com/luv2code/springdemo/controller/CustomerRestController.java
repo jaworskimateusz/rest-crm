@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.luv2code.springdemo.entity.Customer;
+import com.luv2code.springdemo.error.CustomerErrorResponse;
+import com.luv2code.springdemo.error.CustomerNotFoundException;
 import com.luv2code.springdemo.service.CustomerService;
 
 @RestController
@@ -25,6 +27,9 @@ public class CustomerRestController {
 	
 	@GetMapping("/customers/{id}")
 	public Customer getCustomer(@PathVariable int id) {
+		if(customerService.getCustomer(id) == null) {
+			throw new CustomerNotFoundException("Customer with id: " + id + " not found");
+		}
 		return customerService.getCustomer(id);
 	}
 
